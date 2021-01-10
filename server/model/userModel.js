@@ -28,6 +28,22 @@ const UserSchema = new mongoose.Schema({
     },
   },
   Postings: [mongoose.Schema.Types.ObjectId],
+  Comments: [
+    {
+      Upvote: {
+        type: Boolean,
+      },
+      Downvote: {
+        type: Boolean,
+      },
+      Body: {
+        type: String,
+      },
+      User: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);
