@@ -3,13 +3,14 @@ var cors = require("cors");
 
 const connectDB = require("./config/db");
 
+const users = require("./router/userRouter");
+
 //Set up environment
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
 
 //Initialize app as express app
 const app = express();
-const port = process.env.PORT || 3000;
 
 //Enable cross-origin resource sharing
 app.use(cors());
@@ -27,6 +28,11 @@ app.get("/", (req, res) => {
 
 connectDB();
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+app.use("/api/v1/users", users);
+
+//Set up and start app connection
+const PORT = process.env.PORT || 8000;
+app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
