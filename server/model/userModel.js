@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
       default: 0,
     },
   },
+  Postings: [mongoose.Schema.Types.ObjectId],
 });
 
 module.exports = mongoose.model("User", UserSchema);

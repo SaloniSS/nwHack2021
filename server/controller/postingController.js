@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const Posting = require("../model/postingModel");
+const User = require("../model/userModel");
 
 exports.getPostings = async (req, res, next) => {
   try {
@@ -42,7 +44,27 @@ exports.getPosting = async (req, res, next) => {
 
 exports.addPosting = async (req, res, next) => {
   try {
-    const posting = await Posting.create({ ...req.body });
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+
+    const posting = await Posting.create([{ ...req.body }], { session: sess });
+
+    try {
+      searchUser = await User.findById(posting[0].User);
+    } catch (err) {
+      posting[0].remove();
+
+      return res.status(404).json({
+        success: false,
+        error: "Posting author not found so removed the post",
+      });
+    }
+
+    user = searchUser;
+    user.Postings.push(mongoose.Types.ObjectId(posting[0]._id));
+
+    await user.save({ session: sess });
+    sess.commitTransaction();
 
     return res.status(201).json({
       success: true,
@@ -57,6 +79,7 @@ exports.addPosting = async (req, res, next) => {
         error: messages,
       });
     } else {
+      console.log(error);
       return res.status(500).json({
         success: false,
         error: "Server Error",
