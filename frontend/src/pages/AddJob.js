@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 600,
+    minWidth: 700,
   },
   title: {
     fontSize: 14,
@@ -28,37 +28,46 @@ function AddJob() {
 
   return (
     <div className="dashboard">
-      <Navbar />
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            Add a Job
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            Fill out the form below to add a job to our site!
-          </Typography>
-          <form noValidate autoComplete="off">
-            <TextField
-              className={classes.input}
-              id="outlined-basic"
-              label="Title"
-              variant="outlined"
-            />
-            <br />
-            <TextField
-              multiline
-              rows={4}
-              fullWidth
-              id="outlined-basic"
-              label="Description"
-              variant="outlined"
-            />
-          </form>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Submit</Button>
-        </CardActions>
-      </Card>
+      <Navbar title="Add Job" />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "600px",
+        }}
+      >
+        <Card className={classes.root} variant="outlined">
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              Add a Job
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              Fill out the form below to add a job to our site!
+            </Typography>
+            <form noValidate autoComplete="off">
+              <TextField
+                className={classes.input}
+                id="outlined-basic"
+                label="Title"
+                variant="outlined"
+              />
+              <br />
+              <TextField
+                multiline
+                rows={4}
+                fullWidth
+                id="outlined-basic"
+                label="Description"
+                variant="outlined"
+              />
+            </form>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Submit</Button>
+          </CardActions>
+        </Card>
+      </div>
     </div>
   );
 }

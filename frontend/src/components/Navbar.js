@@ -4,8 +4,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+function Navbar(props) {
   const classes = useStyles();
 
   return (
@@ -37,12 +39,17 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Home Page
+            {props.title}
           </Typography>
-          <Link to="/profile">
-            <AccountCircle />
+          <Link to="/add" style={{ marginRight: 10 }}>
+            <AddCircleIcon fontSize="large" />
           </Link>
-          <Button color="inherit">Logout</Button>
+          <Link to="/profile" style={{ marginRight: 10 }}>
+            <AccountCircle fontSize="large" />
+          </Link>
+          <Link to="/">
+            <ExitToAppIcon fontSize="large" />
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
