@@ -66,7 +66,7 @@ function Register() {
               .post("https://nwhack.wl.r.appspot.com/api/v1/users/", user)
               .then(async (response) => {
                 console.log("Success");
-                //history.push("/home");
+                history.push("/home");
               })
               .catch(function (error) {
                 console.log(error);
