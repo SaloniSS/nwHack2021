@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import "../styles/styling.css";
+var bcrypt = require("bcryptjs");
 
 const useStyles = makeStyles({
   root: {
@@ -32,16 +33,20 @@ function Register() {
   let [phone, setPhone] = useState("");
   let [password, setPassword] = useState("");
 
-  function registerUser() {
-    const user = {
-      Name: name,
-      Email: email,
-      Phone: phone,
-      Passsword: password,
-    };
-    console.log(user);
-    history.push("/home");
-  }
+  const registerUser = async () => {
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(password, salt, function (err, hash) {
+        const user = {
+          Name: name,
+          Email: email,
+          Phone: phone,
+          Passsword: hash,
+        };
+        console.log(user);
+      });
+    });
+    //history.push("/home");
+  };
 
   return (
     <div className="Register">
@@ -85,6 +90,7 @@ function Register() {
               className={classes.input}
               id="outlined-basic"
               label="Password"
+              type="password"
               variant="outlined"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
