@@ -64,6 +64,16 @@ function AddJob() {
               />
               <br />
               <TextField
+                multiline
+                rows={2}
+                fullWidth
+                className={classes.input}
+                id="outlined-basic"
+                label="Address"
+                variant="outlined"
+              />
+              <br />
+              <TextField
                 className={classes.input}
                 id="outlined-basic"
                 label="Value ($)"
