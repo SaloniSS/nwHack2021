@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import ChatIcon from "@material-ui/icons/Chat";
+import Badge from "@material-ui/core/Badge";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
@@ -45,10 +47,15 @@ function Navbar(props) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          <Link to="/add" style={{ marginRight: 10, color: "white" }}>
+          <Link to="/add" style={{ marginRight: 15, color: "white" }}>
             <AddCircleIcon fontSize="large" />
           </Link>
-          <Link to="/profile" style={{ marginRight: 10, color: "white" }}>
+          <Link to="/requests" style={{ marginRight: 15, color: "white" }}>
+            <Badge badgeContent={2} color="secondary">
+              <ChatIcon fontSize="large" />
+            </Badge>
+          </Link>
+          <Link to="/profile" style={{ marginRight: 15, color: "white" }}>
             <AccountCircle fontSize="large" />
           </Link>
           {/* <Link to="/">
