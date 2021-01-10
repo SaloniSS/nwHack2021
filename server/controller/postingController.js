@@ -190,3 +190,20 @@ exports.updatePosting = async (req, res, next) => {
     });
   }
 };
+
+exports.getUserPosting = async (req, res) => {
+  try {
+    const postings = await Posting.find({ User: req.params.userid });
+
+    return res.status(200).json({
+      success: true,
+      count: postings.length,
+      payload: postings,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
