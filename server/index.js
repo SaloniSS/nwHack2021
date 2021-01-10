@@ -1,6 +1,8 @@
 const express = require("express");
 var cors = require("cors");
 
+const connectDB = require("./config/db");
+
 //Set up environment
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
@@ -23,6 +25,8 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello, world!").end();
 });
 
+connectDB();
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server listening at http://localhost:${port}`);
 });
