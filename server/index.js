@@ -4,6 +4,7 @@ var cors = require("cors");
 const connectDB = require("./config/db");
 
 const users = require("./router/userRouter");
+const postings = require("./router/postingRouter");
 
 //Set up environment
 const dotenv = require("dotenv");
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 connectDB();
 
 app.use("/api/v1/users", users);
+app.use("/api/v1/postings", postings);
 
 //Set up and start app connection
 const PORT = process.env.PORT || 8000;
