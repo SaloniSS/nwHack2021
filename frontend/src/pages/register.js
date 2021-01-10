@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import "../styles/styling.css";
 var bcrypt = require("bcryptjs");
 const axios = require("axios").default;
+let GLOBAL = require("../global");
 
 const useStyles = makeStyles({
   root: {
@@ -66,6 +67,8 @@ function Register() {
               .post("https://nwhack.wl.r.appspot.com/api/v1/users/", user)
               .then(async (response) => {
                 console.log("Success");
+                console.log(response);
+                GLOBAL.userID = response.data.payload._id;
                 history.push("/home");
               })
               .catch(function (error) {

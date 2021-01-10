@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import "../styles/styling.css";
 var bcrypt = require("bcryptjs");
 const axios = require("axios").default;
+let GLOBAL = require("../global");
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +52,7 @@ function Login() {
               if (res) {
                 console.log("Authenticated");
                 setError(false);
+                GLOBAL.userID = response.data.user._id;
                 history.push("/home");
               } else {
                 console.log("Wrong password");

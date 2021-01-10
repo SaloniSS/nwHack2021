@@ -9,7 +9,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+let GLOBAL = require("../global");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar(props) {
   const classes = useStyles();
+  let history = useHistory();
+
+  const logout = () => {
+    GLOBAL.userID = "";
+    history.push("/");
+  };
 
   return (
     <div className={classes.root}>
@@ -47,9 +54,10 @@ function Navbar(props) {
           <Link to="/profile" style={{ marginRight: 10 }}>
             <AccountCircle fontSize="large" />
           </Link>
-          <Link to="/">
+          <ExitToAppIcon fontSize="large" onClick={logout} />
+          {/* <Link to="/">
             <ExitToAppIcon fontSize="large" />
-          </Link>
+          </Link> */}
         </Toolbar>
       </AppBar>
     </div>
