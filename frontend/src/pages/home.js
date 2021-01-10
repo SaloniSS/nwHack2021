@@ -5,7 +5,7 @@ import { Link, withRouter } from "react-router-dom";
 function Home() {
   return (
     <div className="dashboard">
-      <Navbar />
+      <Navbar title="Home Page" />
       <h1>Dashboard</h1>
       <Link to="/">
         <button>Logout</button>
