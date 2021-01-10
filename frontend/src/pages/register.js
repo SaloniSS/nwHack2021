@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import "../styles/styling.css";
 var bcrypt = require("bcryptjs");
+const axios = require("axios").default;
 
 const useStyles = makeStyles({
   root: {
@@ -35,17 +36,26 @@ function Register() {
 
   const registerUser = async () => {
     bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(password, salt, function (err, hash) {
+      bcrypt.hash(password, salt, async function (err, hash) {
         const user = {
           Name: name,
           Email: email,
-          Phone: phone,
-          Passsword: hash,
+          Phone: parseInt(phone),
+          Password: hash,
         };
         console.log(user);
+
+        await axios
+          .post("https://nwhack.wl.r.appspot.com/api/v1/users/", user)
+          .then(async (response) => {
+            console.log("Success");
+            history.push("/home");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       });
     });
-    //history.push("/home");
   };
 
   return (
