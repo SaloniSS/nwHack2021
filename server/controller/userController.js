@@ -40,6 +40,29 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
+exports.getUserPhone = async (req, res, next) => {
+  try {
+    const user = await User.find({ Phone: req.params.phone });
+
+    if (!user || user.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No user found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user: user[0],
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
 exports.addUser = async (req, res, next) => {
   try {
     const user = await User.create({ ...req.body });
