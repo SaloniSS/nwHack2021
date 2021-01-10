@@ -1,18 +1,18 @@
 
 import React from "react";
-import { Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 function Home() {
-  return (
-    <div className="dashboard">
-      <h1>Dashboard</h1>
-        <button>           
-                <Link to="/">
+    return (
+        <div className="dashboard">
+            <h1>Dashboard</h1>
+            <Link to="/">
+                <button>
                     Logout
-                </Link>
-        </button>
-    </div>
-  );
+                </button>
+            </Link>
+        </div>
+    );
 }
 
 export default Home;

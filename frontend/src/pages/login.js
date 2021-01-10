@@ -4,13 +4,13 @@ import { Link, withRouter } from "react-router-dom";
 
 function Login() {
     return (
-        <div className="Landing">
+        <div className="Login">
             <h1>Login Page</h1>
-            <button>
-                <Link to="/home">
+            <Link to="/home">
+                <button>
                     Login
-                </Link>
-            </button>
+                </button>
+            </Link>
         </div>
     );
 }
