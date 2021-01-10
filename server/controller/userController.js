@@ -21,7 +21,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
 
-    if (user.length == 0) {
+    if (!user || user.length == 0) {
       return res.status(404).json({
         success: false,
         error: "No user found",
@@ -62,5 +62,30 @@ exports.addUser = async (req, res, next) => {
         error: "Server Error",
       });
     }
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user || user.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No user found",
+      });
+    }
+
+    await User.deleteOne({ _id: req.params.id });
+
+    return res.status(200).json({
+      success: true,
+      payload: user[0],
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
   }
 };
