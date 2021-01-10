@@ -171,3 +171,34 @@ exports.updateUser = async (req, res, next) => {
     });
   }
 };
+
+exports.addComment = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user || user.length == 0) {
+      return res.status(404).json({
+        success: false,
+        error: "No user found",
+      });
+    }
+
+    newComment = req.body.Comment;
+    oldComments = user.Comments;
+    console.log(user);
+    console.log(oldComments);
+    user.Caption = oldComments.push(newComment);
+    user.save();
+
+    return res.status(200).json({
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
