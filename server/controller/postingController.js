@@ -99,13 +99,41 @@ exports.deletePosting = async (req, res, next) => {
       });
     }
 
-    await Posting.deleteOne({ _id: req.params.id });
+    // await Posting.deleteOne({ _id: req.params.id });
+
+    // return res.status(200).json({
+    //   success: true,
+    //   payload: posting,
+    // });
+
+    try {
+      searchUser = await User.findById(posting.User);
+    } catch (err) {
+      post.remove();
+
+      return res.status(404).json({
+        success: false,
+        error: "Post author not found but removed the post",
+      });
+    }
+
+    user = searchUser;
+    user.Postings = user.Postings.filter(
+      (val) => JSON.stringify(val) !== JSON.stringify(posting._id)
+    );
+
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await posting.remove({ session: sess });
+    await user.save({ session: sess });
+    sess.commitTransaction();
 
     return res.status(200).json({
       success: true,
       payload: posting,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       error: "Server Error",
