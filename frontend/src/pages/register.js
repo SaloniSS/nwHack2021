@@ -33,26 +33,44 @@ function Register() {
   let [email, setEmail] = useState("");
   let [phone, setPhone] = useState("");
   let [password, setPassword] = useState("");
+  let [error, setError] = useState(false);
 
   const registerUser = async () => {
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(password, salt, async function (err, hash) {
-        const user = {
-          Name: name,
-          Email: email,
-          Phone: parseInt(phone),
-          Password: hash,
-        };
-        console.log(user);
+        const phoneNumber = parseInt(phone);
 
         await axios
-          .post("https://nwhack.wl.r.appspot.com/api/v1/users/", user)
+          .get(
+            `https://nwhack.wl.r.appspot.com/api/v1/users/phone/${phoneNumber}`
+          )
           .then(async (response) => {
-            console.log("Success");
-            history.push("/home");
+            //user already exists
+            console.log(response);
+            console.log("User already exists");
+            setError(true);
           })
-          .catch(function (error) {
+          .catch(async (error) => {
+            //user does not exist
             console.log(error);
+
+            const user = {
+              Name: name,
+              Email: email,
+              Phone: phoneNumber,
+              Password: hash,
+            };
+            console.log(user);
+
+            await axios
+              .post("https://nwhack.wl.r.appspot.com/api/v1/users/", user)
+              .then(async (response) => {
+                console.log("Success");
+                //history.push("/home");
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           });
       });
     });
@@ -107,13 +125,11 @@ function Register() {
             />
           </form>
         </CardContent>
+        {error && <h4 style={{ color: "red" }}>User already exists</h4>}
         <CardActions>
           <button className="formBtn" onClick={registerUser}>
             Register
           </button>
-          {/* <Link to="/home" style={{ margin: "auto" }}>
-            <button className="formBtn">Register</button>
-          </Link> */}
         </CardActions>
       </Card>
     </div>
