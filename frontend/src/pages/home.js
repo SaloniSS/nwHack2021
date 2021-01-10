@@ -6,9 +6,7 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { useHistory } from "react-router-dom";
 const axios = require("axios").default;
-let GLOBAL = require("../global");
 
 const useStyles = makeStyles({
   jobPosting: {
@@ -19,7 +17,6 @@ const useStyles = makeStyles({
 function Home() {
   const [posts, setPosts] = useState(null);
   const classes = useStyles();
-  let history = useHistory();
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -30,11 +27,6 @@ function Home() {
     };
     loadPosts();
   }, []);
-
-  const logout = () => {
-    GLOBAL.userID = "";
-    history.push("/");
-  };
 
   return (
     <div className="dashboard">
@@ -61,10 +53,6 @@ function Home() {
           ))}
         </Grid>
       )}
-      <button onClick={logout}>Logout</button>
-      {/* <Link to="/">
-        <button>Logout</button>
-      </Link> */}
     </div>
   );
 }

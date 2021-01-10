@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.MuiAppBar-colorPrimary {
+  background-color: #7932a8 !important;
+}
