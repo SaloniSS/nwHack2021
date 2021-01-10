@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import '../styles/styling.css';
 
 const useStyles = makeStyles({
   root: {
@@ -82,7 +83,7 @@ function AddJob() {
             </form>
           </CardContent>
           <CardActions>
-            <Button size="small">Submit</Button>
+            <button className="formBtn">Submit</button>
           </CardActions>
         </Card>
       </div>

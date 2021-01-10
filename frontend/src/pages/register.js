@@ -25,10 +25,10 @@ const useStyles = makeStyles({
     },
 });
 
-function Login() {
+function Register() {
     const classes = useStyles();
     return (
-        <div className="Login">
+        <div className="Register">
             
             <Card className={classes.root} variant="outlined">
                 <CardContent>
@@ -36,13 +36,20 @@ function Login() {
                         Cerv
             </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        Login to start serving your community.
+                        Register with your E-mail and phone number.
             </Typography>
                     <form noValidate autoComplete="off">
                         <TextField
                             className={classes.input}
                             id="outlined-basic"
                             label="E-Mail"
+                            variant="outlined"
+                        />
+                        <br />
+                        <TextField
+                            className={classes.input}
+                            id="outlined-basic"
+                            label="Phone Number"
                             variant="outlined"
                         />
                         <br />
@@ -57,9 +64,6 @@ function Login() {
                 </CardContent>
                 <CardActions>
                     <Link to='/home' style={{margin: "auto"}}>
-                        <button className="formBtn">Login</button>
-                    </Link>
-                    <Link to='/register' style={{margin: "auto"}}>
                         <button className="formBtn">Register</button>
                     </Link>
                 </CardActions>
@@ -68,4 +72,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
