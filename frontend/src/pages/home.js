@@ -7,9 +7,9 @@ function Home() {
     <div className="dashboard">
       <Navbar />
       <h1>Dashboard</h1>
-      <button>
-        <Link to="/">Logout</Link>
-      </button>
+      <Link to="/">
+        <button>Logout</button>
+      </Link>
     </div>
   );
 }
