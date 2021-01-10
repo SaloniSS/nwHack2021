@@ -11,6 +11,7 @@ const axios = require("axios").default;
 const useStyles = makeStyles({
   jobPosting: {
     margin: 25,
+    minHeight: "300px",
   },
 });
 
@@ -31,7 +32,9 @@ function Home() {
   return (
     <div className="dashboard">
       <Navbar title="Home Page" />
-      <h1 style={{ color: "white" }}>{posts ? "Open Jobs" : "Loading..."}</h1>
+      <h1 style={{ color: "white" }}>
+        {posts ? "Open Jobs Near You" : "Loading..."}
+      </h1>
       {posts && (
         <Grid container spacing={3}>
           {posts.map((post) => (
@@ -41,12 +44,12 @@ function Home() {
                   <Typography variant="h5" component="h2">
                     {post.Title}
                   </Typography>
-                  <Typography color="textSecondary">{post.Value}</Typography>
-                  <Typography color="textSecondary">{post.Location}</Typography>
-                  <Typography variant="h5">{post.Description}</Typography>
+                  <Typography color="textSecondary">{`${post.Value} - ${post.Location}`}</Typography>
+                  <Typography variant="h6">{post.Description}</Typography>
                 </CardContent>
                 <CardActions>
                   <button className="formBtn">Request</button>
+                  <button className="formBtn">User Info</button>
                 </CardActions>
               </Card>
             </Grid>

@@ -15,6 +15,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 700,
     margin: "auto",
+    marginTop: 150,
   },
   title: {
     fontSize: 14,
@@ -90,7 +91,6 @@ function Login() {
             />
             <br />
             <TextField
-              className={classes.input}
               id="outlined-basic"
               label="Password"
               variant="outlined"
